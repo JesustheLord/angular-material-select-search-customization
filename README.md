@@ -2,12 +2,6 @@
 
 Reusable standalone Angular select wrapper built on Angular Material `mat-select`.
 
-## Location
-
-- Component: `src/app/components/select/select.component.ts`
-- Template: `src/app/components/select/select.component.html`
-- Styles: `src/app/components/select/select.component.scss`
-
 ## Features
 
 - Single and multi-select modes
