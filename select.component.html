@@ -1,5 +1,5 @@
 <mat-form-field [appearance]="appearance" [ngClass]="{'filter-field':removeBottomMargin}" class="w-full">
-    <mat-label *ngIf="label">{{ label | translate }}</mat-label>
+    <mat-label *ngIf="label">{{ label }}</mat-label>
     <mat-select #select panelClass="custom-select-panel" [placeholder]="placeholder" [formControl]="_formControl" [multiple]="multiple"
         (selectionChange)="onSelectionChange($event)">
         <mat-select-trigger>
@@ -13,7 +13,7 @@
         <div *ngIf="showSelectAll" class="select-all-option">
             <mat-checkbox [checked]="allSelected" [indeterminate]="someSelected()" (change)="toggleAllSelection($event)"
                 class="select-all-checkbox">
-                {{ 'COMMON.SELECT_ALL' | translate }}
+                    Select All
             </mat-checkbox>
             <mat-divider class="!my-dsr-spacing-none !mx-dsr-spacing-xsmall"></mat-divider>
         </div>
