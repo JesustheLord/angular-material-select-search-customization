@@ -1,0 +1,1 @@
+# angular-material-select-search-customization
