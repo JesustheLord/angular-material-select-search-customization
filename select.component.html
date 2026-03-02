@@ -1,0 +1,53 @@
+<mat-form-field [appearance]="appearance" [ngClass]="{'filter-field':removeBottomMargin}" class="w-full">
+    <mat-label *ngIf="label">{{ label | translate }}</mat-label>
+    <mat-select #select panelClass="custom-select-panel" [placeholder]="placeholder" [formControl]="_formControl" [multiple]="multiple"
+        (selectionChange)="onSelectionChange($event)">
+        <mat-select-trigger>
+            <span>{{ getDisplayValue() }}</span>
+            @if (multiple && selectedValue && selectedValue.length > 1) {
+            <span class="dsr-typescale-label-small text-dsr-color-secondary">
+                +{{ selectedValue.length - 1 }} {{ 'COMMON.MORE' | translate }}
+            </span>
+            }
+        </mat-select-trigger>
+        <div *ngIf="showSelectAll" class="select-all-option">
+            <mat-checkbox [checked]="allSelected" [indeterminate]="someSelected()" (change)="toggleAllSelection($event)"
+                class="select-all-checkbox">
+                {{ 'COMMON.SELECT_ALL' | translate }}
+            </mat-checkbox>
+            <mat-divider class="!my-dsr-spacing-none !mx-dsr-spacing-xsmall"></mat-divider>
+        </div>
+        @for (item of items; track $index) {
+        <mat-option class="!py-dsr-spacing-small" [value]="valueFieldName ? item[valueFieldName] : item">
+            @if (displayFieldName) {
+            {{ item[displayFieldName] }}
+            }@else{
+            {{ item }}
+            }
+            @if(subFieldName){
+            <br>
+            <small class="dsr-typescale-label-small text-dsr-color-secondary truncate">{{item[subFieldName]}}</small>
+
+            }
+        </mat-option>
+        @if ($index < items.length - 1) { <mat-divider class="!my-dsr-spacing-none !mx-dsr-spacing-xsmall">
+            </mat-divider>
+            }
+            }
+            <!-- @if (multiple && items.length > 0) {
+            <div class="apply-button-container">
+                <button mat-flat-button class="apply-button" color="primary">Apply</button>
+            </div>
+            } -->
+
+    </mat-select>
+    @if (canClear && ((multiple && _formControl.value.length > 0) || (!multiple && _formControl.value))) {
+        <app-icons iconName="erase-content-filled" colorClass="icon-primary"  size="24" (click)="$event.stopPropagation(); clearSelection()"></app-icons>
+    }@else{
+        <app-icons iconName="dropdown-2" size="16"></app-icons>
+    }
+    
+    <mat-error customFormError [inputFormControl]="_formControl" [name]="errorLabel"
+    [formStatus]="_formControl.errors && _formControl.touched"
+    [errorMessages]="errorMessages"></mat-error>
+</mat-form-field>
